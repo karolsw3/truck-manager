@@ -1,5 +1,5 @@
-import {TTruck} from "@/types/TTruck";
-import {TTruckQueryParams} from "@/types/TTruckQueryParams";
+import {TTruck} from "@/src/types/TTruck";
+import {TTruckQueryParams} from "@/src/types/TTruckQueryParams";
 
 /* Service used to manage trucks */
 export interface ITruckService {

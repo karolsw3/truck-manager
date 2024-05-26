@@ -1,6 +1,6 @@
-import {ITruckService} from "@/interfaces/ITruckService";
-import {TTruckQueryParams} from "@/types/TTruckQueryParams";
-import {TTruck} from "@/types/TTruck";
+import {ITruckService} from "@/src/interfaces/ITruckService";
+import {TTruckQueryParams} from "@/src/types/TTruckQueryParams";
+import {TTruck} from "@/src/types/TTruck";
 import {config} from "@/config";
 import axios from "axios";
 

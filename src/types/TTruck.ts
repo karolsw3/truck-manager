@@ -1,4 +1,4 @@
-import {ETruckStatus} from "@/enums/ETruckStatus";
+import {ETruckStatus} from "@/src/enums/ETruckStatus";
 
 export type TTruck = {
   id: number;
