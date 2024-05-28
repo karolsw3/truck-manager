@@ -3,7 +3,7 @@ import {ESortByValue} from "@/src/enums/ESortByValue";
 import {EOrderByValue} from "@/src/enums/EOrderByValue";
 
 export type TTruckQueryParams = Partial<TTruck> & {
-  sortBy?: ESortByValue;
-  orderBy?: EOrderByValue;
+  sort?: ESortByValue;
+  order?: EOrderByValue;
   limit?: number;
 }

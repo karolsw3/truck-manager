@@ -1,32 +1,54 @@
 'use client'
 import * as React from 'react'
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { TTruck } from '@/src/types/TTruck'
 import { StatusBadge } from '@/src/components/StatusBadge'
 import classNames from 'classnames'
+import { TruckService } from '@/src/services/TruckService'
 import { DropdownButton } from '@/src/components/DropdownButton'
 import { EOrderByValue } from '@/src/enums/EOrderByValue'
 import { ESortByValue } from '@/src/enums/ESortByValue'
+import { TTruckQueryParams } from '@/src/types/TTruckQueryParams'
+import { config } from '@/config'
 
 type TruckTableViewProps = {
-	trucks: TTruck[];
+	initialTrucksValue: TTruck[];
 }
 
 export const TruckTableView = (props: TruckTableViewProps) => {
-	const { trucks } = props;
+	const { initialTrucksValue } = props;
+	const [truckService] = useState(() => new TruckService());
+	const [trucks, setTrucks] = useState<TTruck[]>(initialTrucksValue);
 	const [orderBy, setOrderBy] = useState<EOrderByValue>(EOrderByValue.ASCENDING);
 	const [sortBy, setSortBy] = useState<ESortByValue>(ESortByValue.CODE);
 	
 	const onOrderByChange = (value: string) => {
 		setOrderBy(value as EOrderByValue);
+		fetchTrucks();
 	}
 	
 	const onSortByChange = (value: string) => {
 		setSortBy(value as ESortByValue);
+		fetchTrucks();
 	}
 	
-	const orderByValues = Object.values(EOrderByValue);
-	const sortByValues = Object.values(ESortByValue);
+	const fetchTrucks = useCallback(async () => {
+		const params: TTruckQueryParams = {
+			limit: config.defaultTruckLimit,
+			order: orderBy,
+			sort: sortBy,
+		}
+		try {
+			const trucks = await truckService.getTrucks(params);
+			setTrucks(trucks);
+		} catch (error) {
+			// TODO: Show error toast
+			console.error('Error fetching trucks', error);
+		}
+	}, [orderBy, sortBy, truckService])
+	
+	const orderByValues = useMemo(() => Object.values(EOrderByValue), []);
+	const sortByValues = useMemo(() => Object.values(ESortByValue), []);
 
 	return (
 		<>
@@ -67,7 +89,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 					</tr>
 					</thead>
 					<tbody>
-					{ props.trucks.map(truck => (
+					{ trucks.map(truck => (
 						<tr key={ truck.id }>
 							<td className={ 'pl-3 pr-2 py-2' }>{ truck.id }</td>
 							<td className={ 'p-2' }>{ truck.code }</td>
