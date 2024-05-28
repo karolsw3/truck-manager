@@ -12,7 +12,7 @@ export type StatusBadgeProps = {
 }
 
 const statusBadgeClassnamesByColor = {
-	[StatusBadgeColor.NEUTRAL]: 'bg-neutral-100 text-neutral-800 border border-neutral-300',
+	[StatusBadgeColor.NEUTRAL]: 'bg-neutral-100 text-neutral-800 border border-neutral-300 dark:bg-neutral-800 dark:text-neutral-100 dark:border-neutral-700',
 	[StatusBadgeColor.RED]: 'bg-red-500',
 	[StatusBadgeColor.GREEN]: 'bg-green-500',
 }
