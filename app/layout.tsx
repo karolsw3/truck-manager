@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={'dark:bg-neutral-900 dark:text-neutral-50'}
+      className={'bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-50'}
     >
       <body className={inter.className}>
         <div className={'mx-auto max-w-container'}>
