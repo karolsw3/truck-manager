@@ -1,12 +1,12 @@
 import { TruckService } from '@/src/services/TruckService'
+import { TruckTableView } from '@/src/components/TruckTable/view'
+import { config } from '@/config'
 
 export default async function TruckTable() {
 	const truckService = new TruckService();
-	const trucks = await truckService.getTrucks();
+	const trucks = await truckService.getTrucks({ limit: config.defaultTruckLimit });
 
 	return (
-		<>
-			{JSON.stringify(trucks)}
-		</>
+		<TruckTableView trucks={trucks} />
 	)
 }
