@@ -1,5 +1,7 @@
 'use client'
 import * as React from 'react'
+import Image from 'next/image'
+import PlusIcon from '@/src/assets/icons/plus.svg'
 import { useCallback, useMemo, useState } from 'react'
 import { TTruck } from '@/src/types/TTruck'
 import { StatusBadge } from '@/src/components/StatusBadge'
@@ -10,6 +12,7 @@ import { EOrderByValue } from '@/src/enums/EOrderByValue'
 import { ESortByValue } from '@/src/enums/ESortByValue'
 import { TTruckQueryParams } from '@/src/types/TTruckQueryParams'
 import { config } from '@/config'
+import { MainButton } from '@/src/components/MainButton'
 
 type TruckTableViewProps = {
 	initialTrucksValue: TTruck[];
@@ -53,23 +56,36 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 	return (
 		<>
 			<div
-				className={'flex items-center'}
+				className={'flex items-center justify-between'}
 			>
-				<DropdownButton
-					onValueChange={onOrderByChange}
-					value={orderBy}
-					title={'Order By'}
-					id={'order-by'}
-					options={orderByValues}
-				/>
-				<div className={'w-2'}></div>
-				<DropdownButton
-					onValueChange={onSortByChange}
-					value={sortBy}
-					title={'Sort By'}
-					id={'sort-by'}
-					options={sortByValues}
-				/>
+				<div
+					className={'flex items-center'}
+				>
+					<DropdownButton
+						onValueChange={onOrderByChange}
+						value={orderBy}
+						title={'Order By'}
+						id={'order-by'}
+						options={orderByValues}
+					/>
+					<div className={'w-2'}></div>
+					<DropdownButton
+						onValueChange={onSortByChange}
+						value={sortBy}
+						title={'Sort By'}
+						id={'sort-by'}
+						options={sortByValues}
+					/>
+				</div>
+				<MainButton>
+					Add Truck
+					<Image
+						src={PlusIcon}
+						className={'invert dark:invert-0 ml-1'}
+						alt={'Add Truck'}
+						width={14}
+					/>
+				</MainButton>
 			</div>
 			<div className={classNames(
 				'mt-3 p-4 font-light rounded-xl text-sm bg-white dark:bg-neutral-800',
