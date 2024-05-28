@@ -18,11 +18,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={'dark:bg-neutral-800 dark:text-neutral-50'}
+      className={'dark:bg-neutral-900 dark:text-neutral-50'}
     >
       <body className={inter.className}>
-        <DarkModeToggle />
-        {children}
+        <div className={'mx-auto max-w-container'}>
+          <DarkModeToggle />
+          {children}
+        </div>
       </body>
     </html>
   );

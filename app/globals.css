@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Configure default font weight */
+@layer utilities {
+  .font-weight-normal {
+    font-weight: 400;
+  }
+  .font-weight-bold {
+    font-weight: 700;
+  }
+}
