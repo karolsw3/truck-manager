@@ -3,7 +3,7 @@ import { MainInput } from '@/src/components/MainInput'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useCallback, useMemo } from 'react'
 import { CreateTruckDto } from '@/src/dtos/CreateTruckDto'
-import { MainButton } from '@/src/components/MainButton'
+import { EMainButtonTheme, MainButton } from '@/src/components/MainButton'
 
 export const CreateNewTruckForm = () => {
 	const {
@@ -68,7 +68,10 @@ export const CreateNewTruckForm = () => {
 				register={register}
 				maxLength={40}
 			/>
-			<MainButton type={'submit'}>
+			<MainButton
+				type={'submit'}
+				theme={EMainButtonTheme.PRIMARY}
+			>
 				Submit
 			</MainButton>
 		</form>

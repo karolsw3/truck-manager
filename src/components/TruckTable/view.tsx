@@ -1,9 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import Image from 'next/image'
-import PlusIcon from '@/src/assets/icons/plus.svg'
 import { useCallback, useMemo, useState } from 'react'
+import PlusIcon from '@/src/assets/icons/plus.svg'
 import { TTruck } from '@/src/types/TTruck'
 import { StatusBadge } from '@/src/components/StatusBadge'
 import classNames from 'classnames'
@@ -13,7 +12,7 @@ import { EOrderByValue } from '@/src/enums/EOrderByValue'
 import { ESortByValue } from '@/src/enums/ESortByValue'
 import { TTruckQueryParams } from '@/src/types/TTruckQueryParams'
 import { config } from '@/config'
-import { MainButton } from '@/src/components/MainButton'
+import { EMainButtonTheme, MainButton } from '@/src/components/MainButton'
 
 type TruckTableViewProps = {
 	initialTrucksValue: TTruck[];
@@ -80,6 +79,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 				</div>
 				<MainButton
 					href={'/erp/trucks/create'}
+					theme={EMainButtonTheme.PRIMARY}
 					icon={PlusIcon}
 				>
 					Add Truck

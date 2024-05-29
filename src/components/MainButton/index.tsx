@@ -6,21 +6,27 @@ import Image from 'next/image'
 import * as React from 'react'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 
+export enum EMainButtonTheme {
+	PRIMARY = 'primary',
+	NEUTRAL = 'neutral'
+}
+
 type MainButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	children: React.ReactNode;
+	theme?: EMainButtonTheme;
 	icon?: string | StaticImport;
 	href?: string;
 }
-export const MainButton = ({ children, href, icon, ...buttonProps }: MainButtonProps) => {
+export const MainButton = ({ children, href, icon, theme = EMainButtonTheme.NEUTRAL, ...buttonProps }: MainButtonProps) => {
 	const buttonClassNames = useMemo(() => classNames(
-		'flex items-center justify-between',
+		'flex items-center justify-between duration-100',
 		'rounded-lg pl-3 py-1 shadow-sm text-xs font-medium',
-		'bg-neutral-800 text-white dark:bg-white dark:text-neutral-800',
-		'hover:bg-neutral-700 hover:dark:bg-neutral-100 duration-100',
 		'active:opacity-50 focus:ring-2 ring-blue-500 ring-offset-1',
 		'border border-neutral-700 dark:border-white',
+		theme === EMainButtonTheme.PRIMARY && 'bg-neutral-800 text-white dark:bg-white dark:text-neutral-800 hover:bg-neutral-700 hover:dark:bg-neutral-100',
+		theme === EMainButtonTheme.NEUTRAL && 'bg-white text-neutral-800 dark:bg-neutral-800 dark:text-neutral-100 hover:bg-neutral-200 hover:dark:bg-neutral-700',
 		icon ? 'pr-2' : 'pr-3'
-	), [icon])
+	), [icon, theme])
 	if (href) {
 		return (
 			<Link href={href}>
@@ -32,7 +38,10 @@ export const MainButton = ({ children, href, icon, ...buttonProps }: MainButtonP
 					{icon && (
 						<Image
 							src={icon}
-							className={'invert dark:invert-0 ml-1'}
+							className={classNames(
+								'ml-1',
+								theme === EMainButtonTheme.PRIMARY ? 'invert dark:invert-0' : 'invert-0 dark:invert',
+							)}
 							alt={''}
 							width={14}
 						/>
