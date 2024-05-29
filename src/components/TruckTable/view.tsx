@@ -78,14 +78,11 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 						options={sortByValues}
 					/>
 				</div>
-				<MainButton href={'/erp/trucks/create'}>
+				<MainButton
+					href={'/erp/trucks/create'}
+					icon={PlusIcon}
+				>
 					Add Truck
-					<Image
-						src={PlusIcon}
-						className={'invert dark:invert-0 ml-1'}
-						alt={'Add Truck'}
-						width={14}
-					/>
 				</MainButton>
 			</div>
 			<div className={classNames(
@@ -98,25 +95,25 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 						'dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-700',
 					) }>
 					<tr>
-						<th className={ 'rounded-tl-md rounded-bl-md pl-3 pr-2 py-3' }>Id</th>
-						<th className={ 'px-2' }>Code</th>
-						<th className={ 'px-2' }>Name</th>
-						<th className={ 'px-2' }>Status</th>
-						<th className={ 'px-2 rounded-tr-md rounded-br-md' }>Description</th>
+						<th className={'rounded-tl-md rounded-bl-md pl-3 pr-2 py-3'}>Id</th>
+						<th className={'px-2'}>Code</th>
+						<th className={'px-2'}>Name</th>
+						<th className={'px-2'}>Status</th>
+						<th className={'px-2 rounded-tr-md rounded-br-md'}>Description</th>
 					</tr>
 					</thead>
 					<tbody>
 					{trucks.map(truck => (
 						<tr key={ truck.id }>
-							<td className={ 'pl-3 pr-2 py-2' }>{ truck.id }</td>
-							<td className={ 'p-2' }>{ truck.code }</td>
-							<td className={ 'p-2' }>{ truck.name }</td>
-							<td className={ 'p-2' }>
+							<td className={'pl-3 pr-2 py-2'}>{ truck.id }</td>
+							<td className={'p-2'}>{ truck.code }</td>
+							<td className={'p-2'}>{ truck.name }</td>
+							<td className={'p-2'}>
 								<StatusBadge>
 									{ truck.status }
 								</StatusBadge>
 							</td>
-							<td className={ 'p-2' }>{ truck.description }</td>
+							<td className={'p-2'}>{ truck.description }</td>
 						</tr>
 					)) }
 					</tbody>
