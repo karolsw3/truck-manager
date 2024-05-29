@@ -25,11 +25,11 @@ export const MainSelect = <T extends FieldValues, >({ label, register, options, 
 				className={classNames(
 					'w-full border border-neutral-300 dark:border-neutral-600',
 					'rounded-xl bg-white dark:bg-neutral-800 pr-4 text-sm',
-					'focus:outline-offset-2 focus:border-neutral-400 focus:dark:border-neutral-400'
+					'has-[:focus]:ring-2 ring-blue-500 focus:border-neutral-400 focus:dark:border-neutral-400'
 				)}
 			>
 				<select
-					className={'w-full pl-3 py-2 bg-transparent rounded-xl'}
+					className={'peer w-full pl-3 py-2 bg-transparent rounded-xl outline-0'}
 					id={selectProps.id}
 					{...register(label, { required: selectProps.required })}
 					{...selectProps}

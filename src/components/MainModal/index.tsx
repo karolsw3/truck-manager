@@ -9,11 +9,14 @@ import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
 
 type MainModalProps = {
 	title: string;
-	children: React.ReactNode;
-	footerContent?: React.ReactNode;
+	footerContent: React.ReactNode;
+	children?: (closeModal: () => void) => React.ReactNode;
 }
 export const MainModal = (props: MainModalProps) => {
 	const router = useRouter()
+	const closeModal = () => {
+		router.back()
+	}
 
 	return (
 		<div className={ classNames(
@@ -43,9 +46,7 @@ export const MainModal = (props: MainModalProps) => {
 								'hover:opacity-75 duration-100',
 								'active:opacity-50 focus:ring ring-blue-500 ring-offset-1'
 							)}
-							onClick={() => {
-								router.back()
-							}}
+							onClick={closeModal}
 						>
 							<Image
 								src={ XIcon }
@@ -59,7 +60,7 @@ export const MainModal = (props: MainModalProps) => {
 				<div
 					className={'px-5 py-4 bg-white dark:bg-neutral-800'}
 				>
-					{props.children}
+					{props.children?.(closeModal)}
 				</div>
 				<div
 					className={classNames(
@@ -75,9 +76,7 @@ export const MainModal = (props: MainModalProps) => {
 					>
 						<MainButton
 							theme={EMainButtonTheme.NEUTRAL}
-							onClick={() => {
-								router.back()
-							}}
+							onClick={closeModal}
 						>
 							Cancel
 						</MainButton>

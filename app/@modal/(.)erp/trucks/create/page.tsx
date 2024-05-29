@@ -1,7 +1,9 @@
+'use client'
+
 import { MainModal } from '@/src/components/MainModal'
-import { CreateNewTruckForm } from '@/src/components/forms/CreateNewTruckForm'
 import { MainButton } from '@/src/components/MainButton'
 import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
+import { CreateNewTruckForm } from '@/src/components/forms/CreateNewTruckForm'
 
 export default function Page () {
 	return (
@@ -17,7 +19,11 @@ export default function Page () {
 				</MainButton>
 			)}
 		>
-			<CreateNewTruckForm />
+			{(closeModal) => (
+				<CreateNewTruckForm
+					onSubmitSuccess={closeModal}
+				/>
+			)}
 		</MainModal>
 	)
 }
