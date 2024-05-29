@@ -30,7 +30,7 @@ export const DropdownButtonView = (props: DropdownButtonViewProps) => {
 					'pl-3 pr-2 py-1 rounded-lg text-xs shadow-sm font-medium',
 					'bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700',
 					'hover:bg-neutral-50 hover:dark:bg-neutral-700 duration-100',
-					'active:opacity-50 focus:ring-2 ring-blue-500 ring-offset-1',
+					'active:opacity-50 focus'
 				)}
 				onClick={openDropdown}
 			>

@@ -5,5 +5,5 @@ export type TTruck = {
   code: string;
   name: string;
   status: ETruckStatus;
-  description: string;
+  description?: string;
 }

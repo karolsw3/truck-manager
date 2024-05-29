@@ -1,4 +1,5 @@
 'use client'
+
 import * as React from 'react'
 import Image from 'next/image'
 import PlusIcon from '@/src/assets/icons/plus.svg'
@@ -77,7 +78,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 						options={sortByValues}
 					/>
 				</div>
-				<MainButton>
+				<MainButton href={'/erp/trucks/create'}>
 					Add Truck
 					<Image
 						src={PlusIcon}
@@ -105,7 +106,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 					</tr>
 					</thead>
 					<tbody>
-					{ trucks.map(truck => (
+					{trucks.map(truck => (
 						<tr key={ truck.id }>
 							<td className={ 'pl-3 pr-2 py-2' }>{ truck.id }</td>
 							<td className={ 'p-2' }>{ truck.code }</td>

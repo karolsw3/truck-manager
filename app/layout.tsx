@@ -11,8 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
+  modal,
   children,
 }: Readonly<{
+  modal: React.ReactNode;
   children: React.ReactNode;
 }>) {
   return (
@@ -23,6 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className={'mx-auto max-w-container'}>
           <DarkModeToggle />
+          {modal}
           {children}
         </div>
       </body>
