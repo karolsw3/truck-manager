@@ -1,15 +1,12 @@
 'use client'
+
 import classNames from 'classnames'
 import Link from 'next/link'
 import { ButtonHTMLAttributes, useMemo } from 'react'
 import Image from 'next/image'
 import * as React from 'react'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
-
-export enum EMainButtonTheme {
-	PRIMARY = 'primary',
-	NEUTRAL = 'neutral'
-}
+import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
 
 type MainButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	children: React.ReactNode;

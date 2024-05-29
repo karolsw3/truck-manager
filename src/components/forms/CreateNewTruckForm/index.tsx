@@ -1,26 +1,49 @@
 'use client'
+
 import { MainInput } from '@/src/components/MainInput'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { CreateTruckDto } from '@/src/dtos/CreateTruckDto'
-import { EMainButtonTheme, MainButton } from '@/src/components/MainButton'
+import { TruckService } from '@/src/services/TruckService'
+import { toast } from 'sonner'
+import { AxiosError } from 'axios'
+import { MainSelect } from '@/src/components/MainSelect'
+import { ETruckStatus } from '@/src/enums/ETruckStatus'
 
-export const CreateNewTruckForm = () => {
+type CreateNewTruckFormProps = {
+	onSubmitSuccess?: () => void;
+	onSubmitError?: () => void;
+}
+
+export const CreateNewTruckForm = (props: CreateNewTruckFormProps) => {
+	const [truckService] = useState(() => new TruckService());
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors },
 	} = useForm<CreateTruckDto>()
-	const onSubmit: SubmitHandler<CreateTruckDto> = useCallback((data) => {
-		console.log(data)
-	}, [])
+	const onSubmit: SubmitHandler<CreateTruckDto> = useCallback(async (data) => {
+		try {
+			await truckService.createTruck(data)
+			toast('Truck added successfully')
+			props.onSubmitSuccess?.()
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				toast.error(`Error adding new Truck: ${error.message}`)
+				return
+			}
+			toast.error('Error adding new Truck')
+			props.onSubmitError?.()
+		}
+	}, [props, truckService])
 
 	// Input with CreateNewTruckInputs type baked-in
 	const MainTruckInput = useMemo(() => MainInput<CreateTruckDto>, [])
 
 	return (
 		<form
+			id={'createNewTruckForm'}
 			onSubmit={handleSubmit(onSubmit)}
 			className={'space-y-3'}
 		>
@@ -51,13 +74,12 @@ export const CreateNewTruckForm = () => {
 				maxLength={40}
 				required
 			/>
-			<MainTruckInput
+			<MainSelect<CreateTruckDto>
 				id={'truckStatus'}
-				value={watch('status') || ''}
 				label={'status'}
-				placeholder={'Status'}
+				options={Object.keys(ETruckStatus)}
+				value={watch('status') || ''}
 				register={register}
-				maxLength={40}
 				required
 			/>
 			<MainTruckInput
@@ -68,12 +90,6 @@ export const CreateNewTruckForm = () => {
 				register={register}
 				maxLength={40}
 			/>
-			<MainButton
-				type={'submit'}
-				theme={EMainButtonTheme.PRIMARY}
-			>
-				Submit
-			</MainButton>
 		</form>
 	)
 }

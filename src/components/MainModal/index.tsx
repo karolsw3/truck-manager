@@ -4,10 +4,13 @@ import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import XIcon from '@/src/assets/icons/x.svg'
+import { MainButton } from '@/src/components/MainButton'
+import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
 
 type MainModalProps = {
 	title: string;
 	children: React.ReactNode;
+	footerContent?: React.ReactNode;
 }
 export const MainModal = (props: MainModalProps) => {
 	const router = useRouter()
@@ -54,9 +57,32 @@ export const MainModal = (props: MainModalProps) => {
 					</div>
 				</div>
 				<div
-					className={'pl-5 pr-4 py-4 bg-white dark:bg-neutral-800'}
+					className={'px-5 py-4 bg-white dark:bg-neutral-800'}
 				>
 					{props.children}
+				</div>
+				<div
+					className={classNames(
+						'w-full py-4 px-5 flex items-center justify-between',
+						'border-t border-neutral-200 dark:border-neutral-700'
+					)}
+				>
+					<div>
+					
+					</div>
+					<div
+						className={'space-x-2 items-center flex'}
+					>
+						<MainButton
+							theme={EMainButtonTheme.NEUTRAL}
+							onClick={() => {
+								router.back()
+							}}
+						>
+							Cancel
+						</MainButton>
+						{props.footerContent}
+					</div>
 				</div>
 			</div>
 		</div>

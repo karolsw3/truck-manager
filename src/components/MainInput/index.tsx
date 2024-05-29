@@ -36,7 +36,7 @@ export const MainInput = <T extends FieldValues, >({ label, register, ...inputPr
 				<input
 					id={inputProps.id}
 					className={classNames(
-						'w-full border border-neutral-300 dark:border-neutral-500',
+						'w-full border border-neutral-300 dark:border-neutral-600',
 						'rounded-xl bg-white dark:bg-neutral-800 pr-4 pl-3 py-2 text-sm',
 						'focus:outline-offset-2 focus:border-neutral-400 focus:dark:border-neutral-400'
 					)}

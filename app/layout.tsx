@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { DarkModeToggle } from '@/src/components/DarkModeToggle'
+import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
     >
       <body className={inter.className}>
         <div className={'mx-auto max-w-container'}>
+          <Toaster />
           <DarkModeToggle />
           {modal}
           {children}

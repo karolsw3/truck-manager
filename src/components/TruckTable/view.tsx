@@ -12,7 +12,8 @@ import { EOrderByValue } from '@/src/enums/EOrderByValue'
 import { ESortByValue } from '@/src/enums/ESortByValue'
 import { TTruckQueryParams } from '@/src/types/TTruckQueryParams'
 import { config } from '@/config'
-import { EMainButtonTheme, MainButton } from '@/src/components/MainButton'
+import { MainButton } from '@/src/components/MainButton'
+import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
 
 type TruckTableViewProps = {
 	initialTrucksValue: TTruck[];
