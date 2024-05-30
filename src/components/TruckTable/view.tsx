@@ -114,7 +114,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 									{ truck.status }
 								</StatusBadge>
 							</td>
-							<td className={'p-2'}>{ truck.description }</td>
+							<td className={'p-2'}>{ truck.description || '–' }</td>
 						</tr>
 					)) }
 					</tbody>

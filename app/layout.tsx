@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { DarkModeToggle } from '@/src/components/DarkModeToggle'
 import { Toaster } from 'sonner'
+import { TopNavbar } from '@/src/components/TopNavbar'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +25,9 @@ export default function RootLayout({
       className={'bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-50'}
     >
       <body className={inter.className}>
-        <div className={'mx-auto max-w-container'}>
-          <Toaster />
-          <DarkModeToggle />
+        <Toaster />
+        <TopNavbar />
+        <div className={'mt-8 mx-auto max-w-container'}>
           {modal}
           {children}
         </div>
