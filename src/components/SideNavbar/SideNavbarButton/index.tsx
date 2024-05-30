@@ -26,7 +26,7 @@ export const SideNavbarButton = (props: SideNavbarButtonProps) => {
 		>
 			{props.icon && (
 				<Image
-					className={'mr-2'}
+					className={'mr-2 dark:invert'}
 					src={props.icon}
 					width={14}
 					alt={''}

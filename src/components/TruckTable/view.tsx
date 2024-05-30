@@ -14,6 +14,7 @@ import { TTruckQueryParams } from '@/src/types/TTruckQueryParams'
 import { config } from '@/config'
 import { MainButton } from '@/src/components/MainButton'
 import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
+import { toast } from 'sonner'
 
 type TruckTableViewProps = {
 	initialTrucksValue: TTruck[];
@@ -25,17 +26,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 	const [trucks, setTrucks] = useState<TTruck[]>(initialTrucksValue);
 	const [orderBy, setOrderBy] = useState<EOrderByValue>(EOrderByValue.ASCENDING);
 	const [sortBy, setSortBy] = useState<ESortByValue>(ESortByValue.CODE);
-	
-	const onOrderByChange = (value: string) => {
-		setOrderBy(value as EOrderByValue);
-		fetchTrucks();
-	}
-	
-	const onSortByChange = (value: string) => {
-		setSortBy(value as ESortByValue);
-		fetchTrucks();
-	}
-	
+
 	const fetchTrucks = useCallback(async () => {
 		const params: TTruckQueryParams = {
 			limit: config.defaultTruckLimit,
@@ -46,10 +37,29 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 			const trucks = await truckService.getTrucks(params);
 			setTrucks(trucks);
 		} catch (error) {
-			// TODO: Show error toast
-			console.error('Error fetching trucks', error);
+			toast.error('There was a problem fetching trucks. Please try again later.');
+			console.error(error)
 		}
 	}, [orderBy, sortBy, truckService])
+	
+	const onOrderByChange = (value: string) => {
+		setOrderBy(value as EOrderByValue);
+		fetchTrucks();
+	}
+	
+	const onSortByChange = (value: string) => {
+		setSortBy(value as ESortByValue);
+		fetchTrucks();
+	}
+
+	const handleDeleteTruck = useCallback(async (truckId: number) => {
+		try {
+			await truckService.deleteTruck(truckId);
+			toast.success('Truck deleted successfully.');
+		} catch (error) {
+			toast.error('There was a problem deleting the truck. Please try again later.');
+		}
+	}, [truckService])
 	
 	const orderByValues = useMemo(() => Object.values(EOrderByValue), []);
 	const sortByValues = useMemo(() => Object.values(ESortByValue), []);
@@ -96,15 +106,16 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 						'dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-700',
 					) }>
 					<tr>
-						<th className={'rounded-tl-md rounded-bl-md pl-3 pr-2 py-3'}>Id</th>
-						<th className={'px-2'}>Code</th>
-						<th className={'px-2'}>Name</th>
-						<th className={'px-2'}>Status</th>
-						<th className={'px-2 rounded-tr-md rounded-br-md'}>Description</th>
+						<th className={ 'rounded-tl-md rounded-bl-md pl-3 pr-2 py-3' }>Id</th>
+						<th className={ 'px-2' }>Code</th>
+						<th className={ 'px-2' }>Name</th>
+						<th className={ 'px-2' }>Status</th>
+						<th className={ 'px-2' }>Description</th>
+						<th className={ 'px-2 rounded-tr-md rounded-br-md' }>Options</th>
 					</tr>
 					</thead>
 					<tbody>
-					{trucks.map(truck => (
+					{ trucks.map(truck => (
 						<tr key={ truck.id }>
 							<td className={'pl-3 pr-2 py-2'}>{ truck.id }</td>
 							<td className={'p-2'}>{ truck.code }</td>
@@ -115,6 +126,14 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 								</StatusBadge>
 							</td>
 							<td className={'p-2'}>{ truck.description || '–' }</td>
+							<td className={'p-2'}>
+								<MainButton
+									theme={EMainButtonTheme.NEUTRAL}
+									onClick={() => handleDeleteTruck(truck.id)}
+								>
+									Delete
+								</MainButton>
+							</td>
 						</tr>
 					)) }
 					</tbody>

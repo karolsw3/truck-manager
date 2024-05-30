@@ -15,7 +15,7 @@ export class TruckService implements ITruckService {
     return response.data;
   }
 
-  async getTruckById(id: string): Promise<TTruck> {
+  async getTruckById(id: number): Promise<TTruck> {
     const response = await trucksApiClient.get(`/trucks/${id}`);
     return response.data;
   }
@@ -30,7 +30,7 @@ export class TruckService implements ITruckService {
     return response.data;
   }
 
-  async deleteTruck(id: string): Promise<void> {
+  async deleteTruck(id: number): Promise<void> {
     await trucksApiClient.delete(`/trucks/${id}`);
   }
 }
