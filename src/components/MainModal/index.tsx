@@ -21,7 +21,7 @@ export const MainModal = (props: MainModalProps) => {
 	return (
 		<div className={ classNames(
 			'absolute top-0 left-0 w-full h-full text-sm',
-			'bg-black bg-opacity-40 z-20 flex items-center justify-center',
+			'bg-black bg-opacity-40 z-30 flex items-center justify-center',
 			'dark:text-neutral-50'
 		) }>
 			<div

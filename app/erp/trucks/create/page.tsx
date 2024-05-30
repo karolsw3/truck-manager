@@ -1,7 +1,11 @@
-import { CreateNewTruckForm } from '@/src/components/forms/CreateNewTruckForm'
+'use server'
 
-export default function Page() {
-	return (
-		<CreateNewTruckForm />
-	)
+import { permanentRedirect } from 'next/navigation'
+
+export default async function Page() {
+	/*
+		Creating trucks is only supposed to happen in a modal at this time.
+		When the app grows, this should change.
+	*/
+	permanentRedirect('/erp/trucks')
 }

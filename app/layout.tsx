@@ -4,6 +4,10 @@ import "./globals.css";
 import { DarkModeToggle } from '@/src/components/DarkModeToggle'
 import { Toaster } from 'sonner'
 import { TopNavbar } from '@/src/components/TopNavbar'
+import { SideNavbar } from '@/src/components/SideNavbar'
+import classNames from 'classnames'
+import { useLayoutStore } from '@/src/hooks/useLayoutStore'
+import { DynamicPaddingBlock } from '@/src/components/DynamicPaddingBlock'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,12 +28,23 @@ export default function RootLayout({
       lang="en"
       className={'bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-50'}
     >
-      <body className={inter.className}>
+      <body className={classNames(
+        inter.className,
+        'min-h-screen'
+      )}>
         <Toaster />
         <TopNavbar />
-        <div className={'mt-8 mx-auto max-w-container'}>
-          {modal}
-          {children}
+        <div
+          className={'flex items-start'}
+        >
+          <SideNavbar />
+          <main
+            className={'pt-8 mx-auto max-w-container'}
+          >
+            <DynamicPaddingBlock />
+            { modal }
+            { children }
+          </main>
         </div>
       </body>
     </html>
