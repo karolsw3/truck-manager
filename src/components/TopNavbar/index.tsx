@@ -7,6 +7,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { useLayoutStore } from '@/src/hooks/useLayoutStore'
 
 export const TopNavbar = () => {
+	const sideNavbarWidth = useLayoutStore((state) => state.sideNavbarWidth);
 	const setTopNavbarHeight = useLayoutStore((state) => state.setTopNavbarHeight);
 	const navbarRef = useRef<HTMLDivElement | null>(null);
 	useLayoutEffect(() => {
@@ -26,10 +27,14 @@ export const TopNavbar = () => {
 		>
 			<ul
 				className={classNames(
-					'mx-auto w-full max-w-container flex items-center justify-between',
+					'w-full pl-4 pr-8 flex items-center justify-between',
 				)}
 			>
-				<li>
+				<li
+					style={{
+						width: sideNavbarWidth
+					}}
+				>
 					<Link href={'/'}>
 						Truck ERP
 					</Link>

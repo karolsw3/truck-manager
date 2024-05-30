@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { DarkModeToggle } from '@/src/components/DarkModeToggle'
 import { Toaster } from 'sonner'
 import { TopNavbar } from '@/src/components/TopNavbar'
 import { SideNavbar } from '@/src/components/SideNavbar'
 import classNames from 'classnames'
-import { useLayoutStore } from '@/src/hooks/useLayoutStore'
-import { DynamicPaddingBlock } from '@/src/components/DynamicPaddingBlock'
+import { TopNavbarHeight } from '@/src/components/helpers/TopNavbarHeight'
+import { SideNavbarWidth } from '@/src/components/helpers/SideNavbarWidth'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,10 +37,11 @@ export default function RootLayout({
           className={'flex items-start'}
         >
           <SideNavbar />
+          <SideNavbarWidth />
           <main
-            className={'pt-8 mx-auto max-w-container'}
+            className={'pt-8 pb-20 mx-auto px-8 w-full max-w-container'}
           >
-            <DynamicPaddingBlock />
+            <TopNavbarHeight />
             { modal }
             { children }
           </main>
