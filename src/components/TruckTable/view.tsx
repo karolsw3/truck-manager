@@ -51,15 +51,6 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 		setSortBy(value as ESortByValue);
 		fetchTrucks();
 	}
-
-	const handleDeleteTruck = useCallback(async (truckId: number) => {
-		try {
-			await truckService.deleteTruck(truckId);
-			toast.success('Truck deleted successfully.');
-		} catch (error) {
-			toast.error('There was a problem deleting the truck. Please try again later.');
-		}
-	}, [truckService])
 	
 	const orderByValues = useMemo(() => Object.values(EOrderByValue), []);
 	const sortByValues = useMemo(() => Object.values(ESortByValue), []);
@@ -126,12 +117,18 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 								</StatusBadge>
 							</td>
 							<td className={'p-2'}>{ truck.description || '–' }</td>
-							<td className={'p-2'}>
+							<td className={'p-2 space-x-2 flex items-center'}>
 								<MainButton
 									theme={EMainButtonTheme.NEUTRAL}
-									onClick={() => handleDeleteTruck(truck.id)}
+									href={`/erp/trucks/delete/${truck.id}`}
 								>
 									Delete
+								</MainButton>
+								<MainButton
+									theme={EMainButtonTheme.NEUTRAL}
+									href={`/erp/trucks/edit/${truck.id}`}
+								>
+									Edit
 								</MainButton>
 							</td>
 						</tr>
