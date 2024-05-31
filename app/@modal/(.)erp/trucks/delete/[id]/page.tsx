@@ -28,16 +28,23 @@ export default function Page ({ params }: PageProps) {
 			footerContent={(
 				<MainButton
 					theme={EMainButtonTheme.PRIMARY}
-					onClick={() => handleDeleteTruck(id)}
+					type={'submit'}
+					form={'deleteTruckForm'}
 				>
 					Delete
 				</MainButton>
 			)}
 		>
-			{() => (
-				<>
+			{(closeModal) => (
+				<form
+					id={'deleteTruckForm'}
+					onSubmit={() => {
+						handleDeleteTruck(id)
+						closeModal()
+					}}
+				>
 					<p>Are you sure you want to delete this truck?</p>
-				</>
+				</form>
 			)}
 		</MainModal>
 	)
