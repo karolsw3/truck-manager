@@ -1,7 +1,6 @@
+import { redirect } from 'next/navigation'
+
 export default function Page() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <p>Hello</p>
-    </main>
-  );
+  // Nothing to be shown here, just redirect to /erp/trucks
+  redirect('/erp/trucks')
 }
