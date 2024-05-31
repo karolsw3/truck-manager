@@ -3,9 +3,12 @@ import {TTruckQueryParams} from "@/src/types/TTruckQueryParams";
 import {TTruck} from "@/src/types/TTruck";
 import axios from "axios"
 
-const host = process.env.HOST || 'localhost:3000';
+const HOST =
+  process.env.NODE_ENV === "production"
+    ? `https://${process.env.NEXT_PUBLIC_URL}`
+    : "http://localhost:3000";
 const trucksApiClient = axios.create({
-  baseURL: `//${host}/api`,
+  baseURL: `${HOST}/api`,
 })
 
 export class TruckService implements ITruckService {
