@@ -5,7 +5,6 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useCallback, useMemo, useState } from 'react'
 import { CreateTruckDto } from '@/src/dtos/CreateTruckDto'
 import { toast } from 'sonner'
-import { AxiosError } from 'axios'
 import { MainSelect } from '@/src/components/MainSelect'
 import { ETruckStatus } from '@/src/enums/ETruckStatus'
 import { TTruck } from '@/src/types/TTruck'
@@ -33,10 +32,6 @@ export const EditTruckForm = (props: EditTruckFormProps) => {
 			toast('Truck edited successfully')
 			props.onSubmitSuccess?.()
 		} catch (error) {
-			if (error instanceof AxiosError) {
-				toast.error(`Error updating truck: ${error.message}`)
-				return
-			}
 			toast.error('Error updating truck')
 			props.onSubmitError?.()
 		}
