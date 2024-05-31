@@ -16,11 +16,17 @@ async function fetchApi(endpoint: string, options?: RequestInit) {
 
 export async function getTrucks(params?: TTruckQueryParams): Promise<TTruck[]> {
 	const query = new URLSearchParams(params as Record<string, string>).toString();
-	return await fetchApi(`/trucks?${query}`);
+	return await fetchApi(`/trucks?${query}`, {
+		// For simplicity, we're not using the cache
+		// In a real-world scenario, there are definitely cases where we want to cache the response
+		cache: 'no-cache'
+	});
 }
 
 export async function getTruckById(id: number): Promise<TTruck> {
-	return await fetchApi(`/trucks/${id}`);
+	return await fetchApi(`/trucks/${id}`, {
+		cache: 'no-cache'
+	});
 }
 
 export async function createTruck(truck: TTruck): Promise<TTruck> {
