@@ -31,6 +31,7 @@ export const TopNavbar = () => {
 				)}
 			>
 				<li
+					className={'min-w-32'}
 					style={{
 						width: sideNavbarWidth
 					}}

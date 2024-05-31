@@ -12,8 +12,10 @@ export const useLayoutStore = create<LayoutState>()(
 	devtools(
 		persist(
 			(set) => ({
-				topNavbarHeight: 0,
-				sideNavbarWidth: 0,
+				// The default values are guesstimates
+				// but that's better than using "0"
+				topNavbarHeight: 53,
+				sideNavbarWidth: 256,
 				setTopNavbarHeight: (height: number) => set({ topNavbarHeight: height }),
 				setSideNavbarWidth: (width: number) => set({ sideNavbarWidth: width }),
 			}),
