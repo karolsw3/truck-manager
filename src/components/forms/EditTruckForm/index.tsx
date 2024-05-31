@@ -10,6 +10,7 @@ import { ETruckStatus } from '@/src/enums/ETruckStatus'
 import { TTruck } from '@/src/types/TTruck'
 import { UpdateTruckDto } from '@/src/dtos/UpdateTruckDto'
 import { updateTruck } from '@/src/actions/trucks'
+import { allowedNextTruckStatus } from '@/src/helpers/allowedNextTruckStatus'
 
 type EditTruckFormProps = {
 	truckData: TTruck;
@@ -39,6 +40,7 @@ export const EditTruckForm = (props: EditTruckFormProps) => {
 
 	// Input with CreateNewTruckInputs type baked-in
 	const MainTruckInput = useMemo(() => MainInput<UpdateTruckDto>, [])
+	const allowedTruckStatuses = useMemo(() => allowedNextTruckStatus[props.truckData.status], [props.truckData.status])
 
 	return (
 		<form
@@ -76,7 +78,7 @@ export const EditTruckForm = (props: EditTruckFormProps) => {
 			<MainSelect<CreateTruckDto>
 				id={'truckStatus'}
 				label={'status'}
-				options={Object.keys(ETruckStatus)}
+				options={allowedTruckStatuses}
 				value={watch('status') || ''}
 				register={register}
 				required
