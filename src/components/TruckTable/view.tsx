@@ -15,6 +15,7 @@ import { MainButton } from '@/src/components/MainButton'
 import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
 import { toast } from 'sonner'
 import { getTrucks } from '@/src/actions/trucks'
+import { normalizeScreamingSnakeCase } from '@/src/helpers/normalizeScreamingSnakeCase'
 
 type TruckTableViewProps = {
 	initialTrucksValue: TTruck[];
@@ -112,7 +113,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 							<td className={'p-2'}>{ truck.name }</td>
 							<td className={'p-2'}>
 								<StatusBadge>
-									{ truck.status }
+									{ normalizeScreamingSnakeCase(truck.status) }
 								</StatusBadge>
 							</td>
 							<td className={'p-2'}>{ truck.description || '–' }</td>

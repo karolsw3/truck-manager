@@ -22,8 +22,8 @@ export const StatusBadge = (props: StatusBadgeProps) => {
 	return (
 		<div className={classNames(
 			statusBadgeClassnamesByColor[statusBadgeColor],
-			'rounded-full px-3 py-px text-sm',
-			'text-center'
+			'rounded-full px-3 py-1 text-xs font-medium',
+			'text-center capitalize whitespace-nowrap'
 		)}>
 			<p>{props.children}</p>
 		</div>
