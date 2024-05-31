@@ -6,7 +6,6 @@ import PlusIcon from '@/src/assets/icons/plus.svg'
 import { TTruck } from '@/src/types/TTruck'
 import { StatusBadge } from '@/src/components/StatusBadge'
 import classNames from 'classnames'
-import { TruckService } from '@/src/services/TruckService'
 import { DropdownButton } from '@/src/components/DropdownButton'
 import { EOrderByValue } from '@/src/enums/EOrderByValue'
 import { ESortByValue } from '@/src/enums/ESortByValue'
@@ -15,6 +14,7 @@ import { businessConfig } from '@/businessConfig'
 import { MainButton } from '@/src/components/MainButton'
 import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
 import { toast } from 'sonner'
+import { getTrucks } from '@/src/actions/trucks'
 
 type TruckTableViewProps = {
 	initialTrucksValue: TTruck[];
@@ -22,7 +22,6 @@ type TruckTableViewProps = {
 
 export const TruckTableView = (props: TruckTableViewProps) => {
 	const { initialTrucksValue } = props;
-	const [truckService] = useState(() => new TruckService());
 	const [trucks, setTrucks] = useState<TTruck[]>(initialTrucksValue);
 	const [orderBy, setOrderBy] = useState<EOrderByValue>(EOrderByValue.ASCENDING);
 	const [sortBy, setSortBy] = useState<ESortByValue>(ESortByValue.CODE);
@@ -34,13 +33,13 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 			sort: sortBy,
 		}
 		try {
-			const trucks = await truckService.getTrucks(params);
+			const trucks = await getTrucks(params);
 			setTrucks(trucks);
 		} catch (error) {
 			toast.error('There was a problem fetching trucks. Please try again later.');
 			console.error(error)
 		}
-	}, [orderBy, sortBy, truckService])
+	}, [orderBy, sortBy])
 	
 	const onOrderByChange = (value: string) => {
 		setOrderBy(value as EOrderByValue);

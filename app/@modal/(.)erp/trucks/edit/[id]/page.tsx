@@ -5,9 +5,9 @@ import { MainButton } from '@/src/components/MainButton'
 import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
 import { EditTruckForm } from '@/src/components/forms/EditTruckForm'
 import { useEffect, useMemo, useState } from 'react'
-import { TruckService } from '@/src/services/TruckService'
 import { TTruck } from '@/src/types/TTruck'
 import { toast } from 'sonner'
+import { getTruckById } from '@/src/actions/trucks'
 
 type PageProps = {
 	params: {
@@ -16,19 +16,18 @@ type PageProps = {
 }
 export default function Page ({ params }: PageProps) {
 	const { id } = params
-	const [truckService] = useState(() => new TruckService());
 	const [truckData, setTruckData] = useState<TTruck | null>(null)
 	
 	/* We need to re-fetch the individual truck's data
 	 * to ensure we have the whole truck object
 	* */
 	useEffect(() => {
-		truckService.getTruckById(id).then(truck => {
+		getTruckById(id).then(truck => {
 			setTruckData(truck)
 		}).catch(() => {
 			toast.error('There was a problem fetching truck data. Please try again later.')
 		})
-	}, [id, truckService])
+	}, [id])
 	return (
 		<MainModal
 			title={'Edit Truck'}

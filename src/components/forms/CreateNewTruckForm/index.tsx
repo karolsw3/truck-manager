@@ -2,13 +2,13 @@
 
 import { MainInput } from '@/src/components/MainInput'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import { CreateTruckDto } from '@/src/dtos/CreateTruckDto'
-import { TruckService } from '@/src/services/TruckService'
 import { toast } from 'sonner'
 import { AxiosError } from 'axios'
 import { MainSelect } from '@/src/components/MainSelect'
 import { ETruckStatus } from '@/src/enums/ETruckStatus'
+import { createTruck } from '@/src/actions/trucks'
 
 type CreateNewTruckFormProps = {
 	onSubmitSuccess?: () => void;
@@ -16,7 +16,6 @@ type CreateNewTruckFormProps = {
 }
 
 export const CreateNewTruckForm = (props: CreateNewTruckFormProps) => {
-	const [truckService] = useState(() => new TruckService());
 	const {
 		register,
 		handleSubmit,
@@ -25,7 +24,7 @@ export const CreateNewTruckForm = (props: CreateNewTruckFormProps) => {
 	} = useForm<CreateTruckDto>()
 	const onSubmit: SubmitHandler<CreateTruckDto> = useCallback(async (data) => {
 		try {
-			await truckService.createTruck(data)
+			await createTruck(data)
 			toast('Truck added successfully')
 			props.onSubmitSuccess?.()
 		} catch (error) {
@@ -36,7 +35,7 @@ export const CreateNewTruckForm = (props: CreateNewTruckFormProps) => {
 			toast.error('Error adding new Truck')
 			props.onSubmitError?.()
 		}
-	}, [props, truckService])
+	}, [props])
 
 	// Input with CreateNewTruckInputs type baked-in
 	const MainTruckInput = useMemo(() => MainInput<CreateTruckDto>, [])
