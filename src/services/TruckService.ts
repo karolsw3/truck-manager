@@ -1,11 +1,11 @@
 import {ITruckService} from "@/src/interfaces/ITruckService";
 import {TTruckQueryParams} from "@/src/types/TTruckQueryParams";
 import {TTruck} from "@/src/types/TTruck";
-import {config} from "@/config";
-import axios from "axios";
+import axios from "axios"
 
+const host = process.env.HOST || 'localhost:3000';
 const trucksApiClient = axios.create({
-  baseURL: config.trucksApiUrl,
+  baseURL: `//${host}/api`,
 })
 
 export class TruckService implements ITruckService {

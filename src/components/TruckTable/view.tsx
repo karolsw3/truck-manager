@@ -11,7 +11,7 @@ import { DropdownButton } from '@/src/components/DropdownButton'
 import { EOrderByValue } from '@/src/enums/EOrderByValue'
 import { ESortByValue } from '@/src/enums/ESortByValue'
 import { TTruckQueryParams } from '@/src/types/TTruckQueryParams'
-import { config } from '@/config'
+import { businessConfig } from '@/businessConfig'
 import { MainButton } from '@/src/components/MainButton'
 import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
 import { toast } from 'sonner'
@@ -29,7 +29,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 
 	const fetchTrucks = useCallback(async () => {
 		const params: TTruckQueryParams = {
-			limit: config.defaultTruckLimit,
+			limit: businessConfig.defaultTruckLimit,
 			order: orderBy,
 			sort: sortBy,
 		}
