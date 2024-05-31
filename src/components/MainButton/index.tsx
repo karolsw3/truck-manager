@@ -12,9 +12,10 @@ type MainButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	children: React.ReactNode;
 	theme?: EMainButtonTheme;
 	icon?: string | StaticImport;
+	prefetch?: boolean;
 	href?: string;
 }
-export const MainButton = ({ children, href, icon, theme = EMainButtonTheme.NEUTRAL, ...buttonProps }: MainButtonProps) => {
+export const MainButton = ({ children, href, icon, prefetch, theme = EMainButtonTheme.NEUTRAL, ...buttonProps }: MainButtonProps) => {
 	const buttonClassNames = useMemo(() => classNames(
 		'flex items-center justify-between duration-100',
 		'rounded-lg pl-3 py-1 shadow-sm text-xs font-medium',
@@ -26,7 +27,10 @@ export const MainButton = ({ children, href, icon, theme = EMainButtonTheme.NEUT
 	), [icon, theme])
 	if (href) {
 		return (
-			<Link href={href}>
+			<Link
+				href={href}
+				prefetch={prefetch}
+			>
 				<button
 					className={buttonClassNames}
 					{...buttonProps}
