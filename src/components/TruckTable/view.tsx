@@ -144,16 +144,16 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 							<td className={ 'p-2' }>{ truck.description || '–' }</td>
 							<td className={ 'p-2 space-x-2 flex items-center' }>
 								<MainButton
-									theme={ EMainButtonTheme.NEUTRAL }
-									href={ `/erp/trucks/delete/${ truck.id }` }
-								>
-									Delete
-								</MainButton>
-								<MainButton
-									theme={ EMainButtonTheme.NEUTRAL }
+									theme={ EMainButtonTheme.BORDERLESS }
 									href={ `/erp/trucks/edit/${ truck.id }` }
 								>
 									Edit
+								</MainButton>
+								<MainButton
+									theme={ EMainButtonTheme.BORDERLESS }
+									href={ `/erp/trucks/delete/${ truck.id }` }
+								>
+									Delete
 								</MainButton>
 							</td>
 						</tr>
