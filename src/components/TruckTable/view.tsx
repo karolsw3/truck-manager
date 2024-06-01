@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import PlusIcon from '@/src/assets/icons/plus.svg'
 import { TTruck } from '@/src/types/TTruck'
 import { StatusBadge } from '@/src/components/StatusBadge'
@@ -16,22 +16,26 @@ import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
 import { toast } from 'sonner'
 import { getTrucks } from '@/src/actions/trucks'
 import { normalizeScreamingSnakeCase } from '@/src/helpers/normalizeScreamingSnakeCase'
+import { useUpdateQueryParam } from '@/src/hooks/useUpdateQueryParam'
+import { redirect, useRouter } from 'next/navigation'
 
 type TruckTableViewProps = {
 	initialTrucksValue: TTruck[];
+	orderBy?: string | null;
+	sortBy?: string | null;
 }
 
 export const TruckTableView = (props: TruckTableViewProps) => {
-	const { initialTrucksValue } = props;
+	const updateQueryParam = useUpdateQueryParam()
+	const router = useRouter()
+	const { initialTrucksValue, orderBy, sortBy } = props;
 	const [trucks, setTrucks] = useState<TTruck[]>(initialTrucksValue);
-	const [orderBy, setOrderBy] = useState<EOrderByValue>(EOrderByValue.ASCENDING);
-	const [sortBy, setSortBy] = useState<ESortByValue>(ESortByValue.CODE);
 
 	const fetchTrucks = useCallback(async () => {
 		const params: TTruckQueryParams = {
 			limit: businessConfig.defaultTruckLimit,
-			order: orderBy,
-			sort: sortBy,
+			order: orderBy as EOrderByValue,
+			sort: sortBy as ESortByValue,
 		}
 		try {
 			const trucks = await getTrucks(params);
@@ -43,14 +47,17 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 	}, [orderBy, sortBy])
 	
 	const onOrderByChange = (value: string) => {
-		setOrderBy(value as EOrderByValue);
-		fetchTrucks();
+		router.replace(updateQueryParam('orderBy', value))
 	}
 	
 	const onSortByChange = (value: string) => {
-		setSortBy(value as ESortByValue);
-		fetchTrucks();
+		router.replace(updateQueryParam('sortBy', value))
 	}
+	
+	useEffect(() => {
+		// Re-fetch trucks when orderBy or sortBy changes
+		fetchTrucks()
+	}, [fetchTrucks, orderBy, sortBy])
 	
 	const orderByValues = useMemo(() => Object.values(EOrderByValue), []);
 	const sortByValues = useMemo(() => Object.values(ESortByValue), []);
@@ -65,7 +72,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 				>
 					<DropdownButton
 						onValueChange={onOrderByChange}
-						value={orderBy}
+						value={orderBy as string}
 						title={'Order By'}
 						id={'order-by'}
 						options={orderByValues}
@@ -73,7 +80,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 					<div className={'w-2'}></div>
 					<DropdownButton
 						onValueChange={onSortByChange}
-						value={sortBy}
+						value={sortBy as string}
 						title={'Sort By'}
 						id={'sort-by'}
 						options={sortByValues}
