@@ -60,7 +60,10 @@ export const MainButton = ({ children, href, icon, prefetch, theme = EMainButton
 			{icon && (
 				<Image
 					src={icon}
-					className={'invert dark:invert-0 ml-1'}
+					className={classNames(
+						'ml-1',
+						theme === EMainButtonTheme.PRIMARY ? 'invert dark:invert-0' : 'invert-0 dark:invert',
+					)}
 					alt={''}
 					width={14}
 				/>

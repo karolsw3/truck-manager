@@ -18,6 +18,8 @@ import { getTrucks } from '@/src/actions/trucks'
 import { normalizeScreamingSnakeCase } from '@/src/helpers/normalizeScreamingSnakeCase'
 import { useUpdateQueryParam } from '@/src/hooks/useUpdateQueryParam'
 import { redirect, useRouter } from 'next/navigation'
+import ArrowRightIcon from '@/src/assets/icons/arrow-right.svg'
+import ArrowLeftIcon from '@/src/assets/icons/arrow-left.svg'
 
 type TruckTableViewProps = {
 	initialTrucksValue: TTruck[];
@@ -29,13 +31,24 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 	const updateQueryParam = useUpdateQueryParam()
 	const router = useRouter()
 	const { initialTrucksValue, orderBy, sortBy } = props;
+	const [page, setPage] = useState(1);
 	const [trucks, setTrucks] = useState<TTruck[]>(initialTrucksValue);
+	
+	const incrementPage = useCallback(() => {
+		setPage(page + 1)
+	}, [page])
+	
+	const decrementPage = useCallback(() => {
+		setPage(page - 1)
+	}, [page])
 
 	const fetchTrucks = useCallback(async () => {
+		console.log(page)
 		const params: TTruckQueryParams = {
 			limit: businessConfig.defaultTruckLimit,
 			order: orderBy as EOrderByValue,
 			sort: sortBy as ESortByValue,
+			page,
 		}
 		try {
 			const trucks = await getTrucks(params);
@@ -44,7 +57,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 			toast.error('There was a problem fetching trucks. Please try again later.');
 			console.error(error)
 		}
-	}, [orderBy, sortBy])
+	}, [orderBy, sortBy, page])
 	
 	const onOrderByChange = (value: string) => {
 		router.replace(updateQueryParam('orderBy', value))
@@ -53,11 +66,10 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 	const onSortByChange = (value: string) => {
 		router.replace(updateQueryParam('sortBy', value))
 	}
-	
+
 	useEffect(() => {
-		// Re-fetch trucks when orderBy or sortBy changes
 		fetchTrucks()
-	}, [fetchTrucks, orderBy, sortBy])
+	}, [fetchTrucks, orderBy, sortBy, page])
 	
 	const orderByValues = useMemo(() => Object.values(EOrderByValue), []);
 	const sortByValues = useMemo(() => Object.values(ESortByValue), []);
@@ -65,7 +77,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 	return (
 		<>
 			<div
-				className={'flex items-center justify-between'}
+				className={ 'flex items-center justify-between' }
 			>
 				<div
 					className={ 'flex items-center' }
@@ -87,17 +99,17 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 					/>
 				</div>
 				<MainButton
-					href={ '/erp/trucks/create'}
-					theme={EMainButtonTheme.PRIMARY}
-					icon={PlusIcon}
+					href={ '/erp/trucks/create' }
+					theme={ EMainButtonTheme.PRIMARY }
+					icon={ PlusIcon }
 				>
 					Add Truck
 				</MainButton>
 			</div>
-			<div className={classNames(
+			<div className={ classNames(
 				'mt-3 p-4 font-light rounded-xl text-sm bg-white dark:bg-neutral-800',
 				'border border-neutral-200 dark:border-neutral-700 shadow-sm',
-			)}>
+			) }>
 				<table className={ 'w-full' }>
 					<thead className={ classNames(
 						'uppercase text-left tracking-wider text-xs rounded-xl text-neutral-500',
@@ -115,25 +127,25 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 					<tbody>
 					{ trucks.map(truck => (
 						<tr key={ truck.id }>
-							<td className={'pl-3 pr-2 py-2'}>{ truck.id }</td>
-							<td className={'p-2'}>{ truck.code }</td>
-							<td className={'p-2'}>{ truck.name }</td>
-							<td className={'p-2'}>
+							<td className={ 'pl-3 pr-2 py-2' }>{ truck.id }</td>
+							<td className={ 'p-2' }>{ truck.code }</td>
+							<td className={ 'p-2' }>{ truck.name }</td>
+							<td className={ 'p-2' }>
 								<StatusBadge>
 									{ normalizeScreamingSnakeCase(truck.status) }
 								</StatusBadge>
 							</td>
-							<td className={'p-2'}>{ truck.description || '–' }</td>
-							<td className={'p-2 space-x-2 flex items-center'}>
+							<td className={ 'p-2' }>{ truck.description || '–' }</td>
+							<td className={ 'p-2 space-x-2 flex items-center' }>
 								<MainButton
-									theme={EMainButtonTheme.NEUTRAL}
-									href={`/erp/trucks/delete/${truck.id}`}
+									theme={ EMainButtonTheme.NEUTRAL }
+									href={ `/erp/trucks/delete/${ truck.id }` }
 								>
 									Delete
 								</MainButton>
 								<MainButton
-									theme={EMainButtonTheme.NEUTRAL}
-									href={`/erp/trucks/edit/${truck.id}`}
+									theme={ EMainButtonTheme.NEUTRAL }
+									href={ `/erp/trucks/edit/${ truck.id }` }
 								>
 									Edit
 								</MainButton>
@@ -142,6 +154,31 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 					)) }
 					</tbody>
 				</table>
+			</div>
+			<div
+				className={'w-full flex mx-auto mt-4 justify-between items-center'}
+			>
+				{page > 1 ? (
+					<MainButton
+						onClick={decrementPage}
+						icon={ArrowLeftIcon}
+						theme={EMainButtonTheme.NEUTRAL}
+					>
+						Previous Page
+					</MainButton>
+				):<div/>}
+				<p
+					className={'text-xs text-neutral-500 dark:text-neutral-300'}
+				>
+					Page {page}
+				</p>
+				<MainButton
+					onClick={incrementPage}
+					icon={ArrowRightIcon}
+					theme={EMainButtonTheme.NEUTRAL}
+				>
+					Next Page
+				</MainButton>
 			</div>
 		</>
 	);

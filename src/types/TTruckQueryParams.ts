@@ -6,4 +6,5 @@ export type TTruckQueryParams = Partial<TTruck> & {
   sort?: ESortByValue;
   order?: EOrderByValue;
   limit?: number;
+  page?: number;
 }
