@@ -23,6 +23,7 @@ import ArrowLeftIcon from '@/src/assets/icons/arrow-left.svg'
 
 type TruckTableViewProps = {
 	initialTrucksValue: TTruck[];
+	page?: number;
 	orderBy?: string | null;
 	sortBy?: string | null;
 }
@@ -30,25 +31,30 @@ type TruckTableViewProps = {
 export const TruckTableView = (props: TruckTableViewProps) => {
 	const updateQueryParam = useUpdateQueryParam()
 	const router = useRouter()
-	const { initialTrucksValue, orderBy, sortBy } = props;
-	const [page, setPage] = useState(1);
+	const {
+		initialTrucksValue,
+		orderBy,
+		sortBy ,
+		page = 1
+	} = props;
 	const [trucks, setTrucks] = useState<TTruck[]>(initialTrucksValue);
 	
 	const incrementPage = useCallback(() => {
-		setPage(page + 1)
-	}, [page])
+		const nextPageString = (page + 1).toString()
+		router.replace(updateQueryParam('page', nextPageString))
+	}, [page, router, updateQueryParam])
 	
 	const decrementPage = useCallback(() => {
-		setPage(page - 1)
-	}, [page])
+		const nextPageString = (page - 1).toString()
+		router.replace(updateQueryParam('page', nextPageString))
+	}, [page, router, updateQueryParam])
 
 	const fetchTrucks = useCallback(async () => {
-		console.log(page)
 		const params: TTruckQueryParams = {
 			limit: businessConfig.defaultTruckLimit,
 			order: orderBy as EOrderByValue,
 			sort: sortBy as ESortByValue,
-			page,
+			page
 		}
 		try {
 			const trucks = await getTrucks(params);
@@ -57,7 +63,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 			toast.error('There was a problem fetching trucks. Please try again later.');
 			console.error(error)
 		}
-	}, [orderBy, sortBy, page])
+	}, [orderBy, page, sortBy])
 	
 	const onOrderByChange = (value: string) => {
 		router.replace(updateQueryParam('orderBy', value))
@@ -158,15 +164,14 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 			<div
 				className={'w-full flex mx-auto mt-4 justify-between items-center'}
 			>
-				{page > 1 ? (
-					<MainButton
-						onClick={decrementPage}
-						icon={ArrowLeftIcon}
-						theme={EMainButtonTheme.NEUTRAL}
-					>
-						Previous Page
-					</MainButton>
-				):<div/>}
+				<MainButton
+					onClick={decrementPage}
+					icon={ArrowLeftIcon}
+					theme={EMainButtonTheme.NEUTRAL}
+					disabled={page === 1}
+				>
+					Previous Page
+				</MainButton>
 				<p
 					className={'text-xs text-neutral-500 dark:text-neutral-300'}
 				>

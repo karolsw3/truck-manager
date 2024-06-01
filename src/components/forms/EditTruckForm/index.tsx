@@ -88,7 +88,7 @@ export const EditTruckForm = (props: EditTruckFormProps) => {
 				label={'description'}
 				placeholder={'Description'}
 				register={register}
-				maxLength={40}
+				maxLength={120}
 			/>
 		</form>
 	)

@@ -82,7 +82,7 @@ export const CreateNewTruckForm = (props: CreateNewTruckFormProps) => {
 				label={'description'}
 				placeholder={'Description'}
 				register={register}
-				maxLength={40}
+				maxLength={120}
 			/>
 		</form>
 	)

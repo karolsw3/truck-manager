@@ -4,6 +4,7 @@ import TruckTableLoading from '@/src/components/TruckTable/loading'
 
 type PageProps = {
   searchParams: {
+    page: string | null;
     sortBy: string | null;
     orderBy: string | null;
   }

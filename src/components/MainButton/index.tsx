@@ -21,6 +21,7 @@ export const MainButton = ({ children, href, icon, prefetch, theme = EMainButton
 		'rounded-lg pl-3 py-1 shadow-sm text-xs font-medium',
 		'active:opacity-50 focus:ring-2 ring-blue-500 ring-offset-1',
 		'border border-neutral-700 dark:border-white',
+		'disabled:opacity-30 disabled:cursor-not-allowed',
 		theme === EMainButtonTheme.PRIMARY && 'bg-neutral-800 text-white dark:bg-white dark:text-neutral-800 hover:bg-neutral-700 hover:dark:bg-neutral-100',
 		theme === EMainButtonTheme.NEUTRAL && 'bg-white text-neutral-800 dark:bg-neutral-800 dark:text-neutral-100 hover:bg-neutral-200 hover:dark:bg-neutral-700',
 		icon ? 'pr-2' : 'pr-3'
