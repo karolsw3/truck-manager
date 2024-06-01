@@ -50,7 +50,8 @@ export const CreateNewTruckForm = (props: CreateNewTruckFormProps) => {
 				value={watch('id') || ''}
 				label={'id'}
 				placeholder={'405'}
-				maxLength={4}
+				minLength={4}
+				maxLength={12}
 				register={register}
 				required
 			/>
@@ -69,7 +70,8 @@ export const CreateNewTruckForm = (props: CreateNewTruckFormProps) => {
 				label={'code'}
 				placeholder={'Code'}
 				register={register}
-				maxLength={40}
+				minLength={4}
+				maxLength={12}
 				required
 			/>
 			<MainSelect<CreateTruckDto>
