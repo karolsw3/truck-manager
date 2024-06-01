@@ -68,26 +68,26 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 				className={'flex items-center justify-between'}
 			>
 				<div
-					className={'flex items-center'}
+					className={ 'flex items-center' }
 				>
 					<DropdownButton
-						onValueChange={onOrderByChange}
-						value={orderBy as string}
-						title={'Order By'}
-						id={'order-by'}
-						options={orderByValues}
+						onValueChange={ onSortByChange }
+						value={ sortBy as string }
+						title={ 'Sort By' }
+						id={ 'sort-by' }
+						options={ sortByValues }
 					/>
-					<div className={'w-2'}></div>
+					<div className={ 'w-2' }></div>
 					<DropdownButton
-						onValueChange={onSortByChange}
-						value={sortBy as string}
-						title={'Sort By'}
-						id={'sort-by'}
-						options={sortByValues}
+						onValueChange={ onOrderByChange }
+						value={ orderBy as string }
+						title={ 'Order By' }
+						id={ 'order-by' }
+						options={ orderByValues }
 					/>
 				</div>
 				<MainButton
-					href={'/erp/trucks/create'}
+					href={ '/erp/trucks/create'}
 					theme={EMainButtonTheme.PRIMARY}
 					icon={PlusIcon}
 				>
