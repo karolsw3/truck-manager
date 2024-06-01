@@ -90,17 +90,6 @@
     "import-newlines/enforce": ["error", {
       "items": 1
     }],
-    "react/jsx-no-literals": ["error", {
-      "noStrings": true,
-      "ignoreProps": true,
-      "allowedStrings": ["-", "+", ":", "/", ",", "#", "(", ")", "•", "%"]
-    }],
-    "react/jsx-no-bind": ["warn", {
-      "ignoreRefs": true,
-      "allowArrowFunctions": false,
-      "allowFunctions": false,
-      "allowBind": false
-    }],
     "no-restricted-imports": ["error", {
       "paths": [{
         "name": "@firebase/functions",
