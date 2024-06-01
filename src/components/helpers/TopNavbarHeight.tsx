@@ -7,7 +7,7 @@
 import { useLayoutStore } from '@/src/hooks/useLayoutStore'
 
 export const TopNavbarHeight = () => {
-	const topNavbarHeight = useLayoutStore((state) => state.topNavbarHeight);
+	const topNavbarHeight = useLayoutStore((state) => state.topNavbarHeight)
 	return (
 		<div
 			className={'w-full bg-transparent shrink-0'}

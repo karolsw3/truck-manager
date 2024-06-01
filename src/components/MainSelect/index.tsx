@@ -1,5 +1,12 @@
-import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
-import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
+import {
+	DetailedHTMLProps,
+	SelectHTMLAttributes
+} from 'react'
+import {
+	FieldValues,
+	Path,
+	UseFormRegister
+} from 'react-hook-form'
 import classNames from 'classnames'
 
 type MainSelectProps<T extends FieldValues> = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & {
@@ -7,7 +14,13 @@ type MainSelectProps<T extends FieldValues> = DetailedHTMLProps<SelectHTMLAttrib
 	label: Path<T>;
 	options: string[];
 }
-export const MainSelect = <T extends FieldValues, >({ label, register, options, ...selectProps}: MainSelectProps<T>) => {
+
+export const MainSelect = <T extends FieldValues, >({
+	label,
+	register,
+	options,
+	...selectProps
+}: MainSelectProps<T>) => {
 	return (
 		<div>
 			<label
@@ -15,11 +28,11 @@ export const MainSelect = <T extends FieldValues, >({ label, register, options, 
 				className={'text-xs mb-1'}
 			>
 				{label as string}
-					{selectProps.required && (
-						<span>
-							*
-						</span>
-					)}
+				{selectProps.required && (
+					<span>
+						{'*'}
+					</span>
+				)}
 			</label>
 			<div
 				className={classNames(
@@ -31,7 +44,9 @@ export const MainSelect = <T extends FieldValues, >({ label, register, options, 
 				<select
 					className={'peer w-full pl-3 py-2 bg-transparent rounded-xl outline-0'}
 					id={selectProps.id}
-					{...register(label, { required: selectProps.required })}
+					{...register(label, {
+						required: selectProps.required
+					})}
 					{...selectProps}
 				>
 					{options.map(option => (

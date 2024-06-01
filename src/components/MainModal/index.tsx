@@ -12,6 +12,7 @@ type MainModalProps = {
 	footerContent: React.ReactNode;
 	children?: (closeModal: () => void) => React.ReactNode;
 }
+
 export const MainModal = (props: MainModalProps) => {
 	const router = useRouter()
 	const closeModal = () => {
@@ -19,11 +20,13 @@ export const MainModal = (props: MainModalProps) => {
 	}
 
 	return (
-		<div className={ classNames(
-			'fixed top-0 left-0 w-full h-full text-sm',
-			'bg-black bg-opacity-60 z-30 flex items-center justify-center',
-			'dark:text-neutral-50'
-		) }>
+		<div
+			className={classNames(
+				'fixed top-0 left-0 w-full h-full text-sm',
+				'bg-black bg-opacity-60 z-30 flex items-center justify-center',
+				'dark:text-neutral-50'
+			)}
+		>
 			<div
 				className={'w-full max-w-2xl bg-white rounded-xl shadow-lg overflow-hidden dark:bg-neutral-800'}
 			>
@@ -34,7 +37,9 @@ export const MainModal = (props: MainModalProps) => {
 					)}
 				>
 					<div>
-						<b className={'text-neutral-700 dark:text-neutral-100 font-medium'}>
+						<b
+							className={'text-neutral-700 dark:text-neutral-100 font-medium'}
+						>
 							{props.title}
 						</b>
 					</div>
@@ -49,10 +54,10 @@ export const MainModal = (props: MainModalProps) => {
 							onClick={closeModal}
 						>
 							<Image
-								src={ XIcon }
-								alt={ 'Close Modal' }
+								src={XIcon}
+								alt={'Close Modal'}
 								className={'dark:invert invert-0'}
-								width={ 16 }
+								width={16}
 							/>
 						</button>
 					</div>
@@ -69,7 +74,7 @@ export const MainModal = (props: MainModalProps) => {
 					)}
 				>
 					<div>
-					
+
 					</div>
 					<div
 						className={'space-x-2 items-center flex'}
@@ -78,7 +83,7 @@ export const MainModal = (props: MainModalProps) => {
 							theme={EMainButtonTheme.NEUTRAL}
 							onClick={closeModal}
 						>
-							Cancel
+							{'Cancel'}
 						</MainButton>
 						{props.footerContent}
 					</div>

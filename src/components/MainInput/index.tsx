@@ -1,15 +1,28 @@
 'use client'
 
-import { ChangeEvent, InputHTMLAttributes, useMemo, useState } from 'react'
+import {
+	ChangeEvent,
+	InputHTMLAttributes,
+	useMemo,
+	useState
+} from 'react'
 import classNames from 'classnames'
-import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
+import {
+	FieldValues,
+	Path,
+	UseFormRegister
+} from 'react-hook-form'
 
 type MainInputProps<T extends FieldValues> = InputHTMLAttributes<HTMLInputElement> & {
 	register: UseFormRegister<T>
 	label: Path<T>;
 }
 
-export const MainInput = <T extends FieldValues, >({ label, register, ...inputProps }: MainInputProps<T>) => {
+export const MainInput = <T extends FieldValues, >({
+	label,
+	register,
+	...inputProps
+}: MainInputProps<T>) => {
 	const valueLength = useMemo(() => {
 		return inputProps.value?.toString().length
 	}, [inputProps.value])
@@ -26,7 +39,7 @@ export const MainInput = <T extends FieldValues, >({ label, register, ...inputPr
 				{label as string}
 				{inputProps.required && (
 					<span>
-						*
+						{'*'}
 					</span>
 				)}
 			</label>
@@ -41,7 +54,9 @@ export const MainInput = <T extends FieldValues, >({ label, register, ...inputPr
 						'focus:outline-offset-2 focus:border-neutral-400 focus:dark:border-neutral-400',
 						'disabled:opacity-50 disabled:cursor-not-allowed'
 					)}
-					{...register(label, { required: inputProps.required })}
+					{...register(label, {
+						required: inputProps.required
+					})}
 					{...inputProps}
 				/>
 				{inputProps.maxLength && (

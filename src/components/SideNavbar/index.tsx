@@ -2,7 +2,10 @@
 
 import classNames from 'classnames'
 import { useLayoutStore } from '@/src/hooks/useLayoutStore'
-import { useLayoutEffect, useRef } from 'react'
+import {
+	useLayoutEffect,
+	useRef
+} from 'react'
 import { SideNavbarButton } from '@/src/components/SideNavbar/SideNavbarButton'
 import TruckIcon from '@/src/assets/icons/truck.svg'
 import UserIcon from '@/src/assets/icons/user.svg'
@@ -10,16 +13,18 @@ import ArchiveIcon from '@/src/assets/icons/archive.svg'
 import SmileIcon from '@/src/assets/icons/smile.svg'
 
 type SideNavbarProps = {}
+
 export const SideNavbar = (props: SideNavbarProps) => {
-	const topNavbarHeight = useLayoutStore((state) => state.topNavbarHeight);
-	const setSideNavbarWidth = useLayoutStore((state) => state.setSideNavbarWidth);
-	const sideNavbarRef = useRef<HTMLDivElement | null>(null);
+	const topNavbarHeight = useLayoutStore((state) => state.topNavbarHeight)
+	const setSideNavbarWidth = useLayoutStore((state) => state.setSideNavbarWidth)
+	const sideNavbarRef = useRef<HTMLDivElement | null>(null)
+
 	useLayoutEffect(() => {
 		if (sideNavbarRef.current) {
-			const sideNavbarWidth = sideNavbarRef.current?.offsetWidth;
-			setSideNavbarWidth(sideNavbarWidth);
+			const sideNavbarWidth = sideNavbarRef.current?.offsetWidth
+			setSideNavbarWidth(sideNavbarWidth)
 		}
-	}, [setSideNavbarWidth]);
+	}, [setSideNavbarWidth])
 
 	return (
 		<nav
@@ -39,28 +44,28 @@ export const SideNavbar = (props: SideNavbarProps) => {
 						icon={TruckIcon}
 						href={'/erp/trucks'}
 					>
-						Trucks
+						{'Trucks'}
 					</SideNavbarButton>
 					<SideNavbarButton
 						icon={UserIcon}
 						href={'/erp/employees'}
 						disabled
 					>
-						Employees
+						{'Employees'}
 					</SideNavbarButton>
 					<SideNavbarButton
 						icon={ArchiveIcon}
 						href={'/erp/factory'}
 						disabled
 					>
-						Factory
+						{'Factory'}
 					</SideNavbarButton>
 					<SideNavbarButton
 						icon={SmileIcon}
 						href={'/erp/customer'}
 						disabled
 					>
-						Customer
+						{'Customer'}
 					</SideNavbarButton>
 				</li>
 			</ul>

@@ -1,3 +1,113 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "eslint-config-next",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "plugins": [
+    "destructuring-newline",
+    "import-newlines",
+    "jsx-a11y"
+  ],
+  "rules": {
+    "indent": [2, "tab", { "SwitchCase": 1, "VariableDeclarator": 1 }],
+    "key-spacing": ["error", {
+      "mode": "strict"
+    }],
+    // Prefer useCallback
+    "linebreak-style": 0,
+    "react/no-unescaped-entities": ["error", {"forbid": [">", "}"]}],
+    "destructuring-newline/object-property-newline": 2,
+    "object-curly-newline": ["error", {
+      "ObjectExpression": "always",
+      "ObjectPattern": { "multiline": true },
+      "ExportDeclaration": { "multiline": true, "minProperties": 1 }
+    }],
+    "array-element-newline": ["error", {
+      "ArrayExpression": "consistent",
+      "ArrayPattern": { "minItems": 3 }
+    }],
+    "array-bracket-newline": ["error", "consistent"],
+    "react/jsx-indent": ["error", "tab", {
+      "checkAttributes": true,
+      "indentLogicalExpressions": true
+    }],
+    // Disallow use of lambda functions in JSX props
+    "function-paren-newline": ["error", "multiline-arguments"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "react/jsx-wrap-multilines": ["error",
+      {
+        "declaration": "parens-new-line",
+        "assignment": "parens-new-line",
+        "return": "parens-new-line",
+        "arrow": "parens-new-line",
+        "condition": "parens-new-line",
+        "logical": "parens-new-line",
+        "prop": "parens-new-line"
+      }
+    ],
+    "react/jsx-curly-spacing": ["error", "never"],
+    "react/jsx-closing-bracket-location": ["error", {
+      "selfClosing": "tag-aligned",
+      "nonEmpty": "tag-aligned"
+    }],
+    "react/jsx-closing-tag-location": "error",
+    "react/jsx-first-prop-new-line": ["error", "always"],
+    "react/jsx-indent-props": ["error", "tab"],
+    "react/jsx-max-props-per-line": ["error", { "maximum": 1, "when": "always" }],
+    "semi": ["error", "never"],
+    "comma-dangle": ["error", "never"],
+    "no-multiple-empty-lines": ["error", {
+      "max": 1
+    }],
+    "no-console": ["error", { "allow": ["error", "warn"]}],
+    "no-mixed-operators": ["error"],
+    "no-negated-condition": "error",
+    "no-nested-ternary": "error",
+    "yoda": "error",
+    "jsx-quotes": ["error", "prefer-single"],
+    "no-trailing-spaces": "error",
+    "object-curly-spacing": ["error", "always"],
+    "object-property-newline": "error",
+    "padded-blocks": ["error", "never"],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "never", "prev": ["const", "let", "var"], "next": "*"},
+      { "blankLine": "always", "prev": "*", "next": "export"},
+      { "blankLine": "always", "prev": "multiline-expression", "next": "const"},
+      { "blankLine": "always", "prev": "const", "next": "multiline-expression"},
+      { "blankLine": "always", "prev": "multiline-const", "next": ["multiline-expression", "return"]},
+      { "blankLine": "always", "prev": ["multiline-expression", "return"], "next": "multiline-const"}
+    ],
+    "quotes": ["error", "single"],
+    "template-curly-spacing": "error",
+    "prefer-arrow-callback": ["error"],
+    "no-lonely-if": "error",
+    "no-implicit-coercion": "error",
+    "no-extra-boolean-cast": "error",
+    "no-confusing-arrow": "error",
+    "import-newlines/enforce": ["error", {
+      "items": 1
+    }],
+    "react/jsx-no-literals": ["error", {
+      "noStrings": true,
+      "ignoreProps": true,
+      "allowedStrings": ["-", "+", ":", "/", ",", "#", "(", ")", "•", "%"]
+    }],
+    "react/jsx-no-bind": ["warn", {
+      "ignoreRefs": true,
+      "allowArrowFunctions": false,
+      "allowFunctions": false,
+      "allowBind": false
+    }],
+    "no-restricted-imports": ["error", {
+      "paths": [{
+        "name": "@firebase/functions",
+        "importNames": ["httpsCallable"]
+      }]
+    }],
+    "jsx-a11y/anchor-is-valid": "off",
+    "react/jsx-curly-brace-presence": ["error", { "props": "always", "children": "always" }]
+  }
 }

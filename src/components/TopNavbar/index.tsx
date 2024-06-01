@@ -3,19 +3,23 @@
 import { DarkModeToggle } from '@/src/components/DarkModeToggle'
 import classNames from 'classnames'
 import Link from 'next/link'
-import { useLayoutEffect, useRef } from 'react'
+import {
+	useLayoutEffect,
+	useRef
+} from 'react'
 import { useLayoutStore } from '@/src/hooks/useLayoutStore'
 
 export const TopNavbar = () => {
-	const sideNavbarWidth = useLayoutStore((state) => state.sideNavbarWidth);
-	const setTopNavbarHeight = useLayoutStore((state) => state.setTopNavbarHeight);
-	const navbarRef = useRef<HTMLDivElement | null>(null);
+	const sideNavbarWidth = useLayoutStore((state) => state.sideNavbarWidth)
+	const setTopNavbarHeight = useLayoutStore((state) => state.setTopNavbarHeight)
+	const navbarRef = useRef<HTMLDivElement | null>(null)
+
 	useLayoutEffect(() => {
 		if (navbarRef.current) {
-			const topNavbarHeight = navbarRef.current.offsetHeight;
-			setTopNavbarHeight(topNavbarHeight);
+			const topNavbarHeight = navbarRef.current.offsetHeight
+			setTopNavbarHeight(topNavbarHeight)
 		}
-	}, [setTopNavbarHeight]);
+	}, [setTopNavbarHeight])
 
 	return (
 		<nav
@@ -36,8 +40,10 @@ export const TopNavbar = () => {
 						width: sideNavbarWidth
 					}}
 				>
-					<Link href={'/'}>
-						Truck ERP
+					<Link
+						href={'/'}
+					>
+						{'Truck ERP'}
 					</Link>
 				</li>
 				<li>

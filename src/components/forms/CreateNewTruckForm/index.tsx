@@ -1,8 +1,14 @@
 'use client'
 
 import { MainInput } from '@/src/components/MainInput'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useCallback, useMemo } from 'react'
+import {
+	SubmitHandler,
+	useForm
+} from 'react-hook-form'
+import {
+	useCallback,
+	useMemo
+} from 'react'
 import { CreateTruckDto } from '@/src/dtos/CreateTruckDto'
 import { toast } from 'sonner'
 import { MainSelect } from '@/src/components/MainSelect'
@@ -19,7 +25,7 @@ export const CreateNewTruckForm = (props: CreateNewTruckFormProps) => {
 		register,
 		handleSubmit,
 		watch,
-		formState: { errors },
+		formState: { errors }
 	} = useForm<CreateTruckDto>()
 	const onSubmit: SubmitHandler<CreateTruckDto> = useCallback(async (data) => {
 		try {
@@ -31,10 +37,8 @@ export const CreateNewTruckForm = (props: CreateNewTruckFormProps) => {
 			props.onSubmitError?.()
 		}
 	}, [props])
-
 	// Input with CreateNewTruckInputs type baked-in
 	const MainTruckInput = useMemo(() => MainInput<CreateTruckDto>, [])
-
 	return (
 		<form
 			id={'createNewTruckForm'}

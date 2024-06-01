@@ -9,14 +9,15 @@ type TruckTableProps = {
 	orderBy: string | null;
 	sortBy: string | null;
 }
+
 export default async function TruckTable(props: TruckTableProps) {
-	const pageNumber = Number(props.page) || 1;
+	const pageNumber = Number(props.page) || 1
 	const trucks = await getTrucks({
 		page: pageNumber,
 		sort: props.sortBy as ESortByValue,
 		order: props.orderBy as EOrderByValue,
 		limit: businessConfig.defaultTruckLimit
-	});
+	})
 
 	return (
 		<TruckTableView

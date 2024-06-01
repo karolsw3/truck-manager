@@ -9,14 +9,17 @@ type PageProps = {
     orderBy: string | null;
   }
 }
+
 export default async function Page({ searchParams }: PageProps) {
-  return (
-    <div>
-      <Suspense fallback={<TruckTableLoading />}>
-        <TruckTable
-          {...searchParams}
-        />
-      </Suspense>
-    </div>
-  );
+	return (
+		<div>
+			<Suspense
+				fallback={<TruckTableLoading />}
+			>
+				<TruckTable
+					{...searchParams}
+				/>
+			</Suspense>
+		</div>
+	)
 }

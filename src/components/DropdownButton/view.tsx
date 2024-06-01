@@ -20,14 +20,15 @@ export const DropdownButtonView = (props: DropdownButtonViewProps) => {
 		openDropdown,
 		dropdownRef ,
 		title
-	} = props;
+	} = props
+
 	return (
 		<>
 			<button
 				id={buttonId}
 				className={classNames(
 					'flex justify-between items-center',
-					'pl-3 pr-2 py-1 rounded-lg text-xs shadow-sm font-medium',
+					'pl-4 pr-3 py-1 rounded-lg text-xs shadow-sm font-medium',
 					'bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700',
 					'hover:bg-neutral-50 hover:dark:bg-neutral-700 duration-100',
 					'active:opacity-50 focus relative'
@@ -36,7 +37,7 @@ export const DropdownButtonView = (props: DropdownButtonViewProps) => {
 			>
 				{value && (
 					<span
-						className={'absolute left-0 ml-1 w-1 h-1 bg-black dark:bg-white rounded-full'}
+						className={'absolute left-0 ml-2 w-1 h-1 bg-black dark:bg-white rounded-full'}
 					>
 					</span>
 				)}
@@ -90,10 +91,10 @@ export const DropdownButtonView = (props: DropdownButtonViewProps) => {
 					{value && (
 						<li>
 							<button
-								onClick={ () => onValueChange('') }
-								className={ 'text-sm text-blue-500 hover:underline px-2 py-1 w-full text-left' }
+								onClick={() => onValueChange('')}
+								className={'text-sm text-blue-500 hover:underline px-2 py-1 w-full text-left'}
 							>
-								Clear selection
+								{'Clear selection'}
 							</button>
 						</li>
 					) }

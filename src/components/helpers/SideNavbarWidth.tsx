@@ -7,7 +7,7 @@
 import { useLayoutStore } from '@/src/hooks/useLayoutStore'
 
 export const SideNavbarWidth = () => {
-	const sideNavbarWidth = useLayoutStore((state) => state.sideNavbarWidth);
+	const sideNavbarWidth = useLayoutStore((state) => state.sideNavbarWidth)
 	return (
 		<div
 			className={'h-full bg-transparent shrink-0'}

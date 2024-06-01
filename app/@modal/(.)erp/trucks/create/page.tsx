@@ -15,7 +15,7 @@ export default function Page () {
 					form={'createNewTruckForm'}
 					theme={EMainButtonTheme.PRIMARY}
 				>
-					Submit
+					{'Submit'}
 				</MainButton>
 			)}
 		>

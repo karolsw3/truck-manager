@@ -24,6 +24,9 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "eslint-plugin-destructuring-newline": "^0.1.1",
+    "eslint-plugin-import-newlines": "^1.4.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

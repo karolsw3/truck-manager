@@ -3,7 +3,10 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import * as React from 'react'
-import { ButtonHTMLAttributes, useMemo } from 'react'
+import {
+	ButtonHTMLAttributes,
+	useMemo
+} from 'react'
 import Image from 'next/image'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 import { EMainButtonTheme } from '@/src/enums/EMainButtonTheme'
@@ -15,7 +18,15 @@ type MainButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 	prefetch?: boolean;
 	href?: string;
 }
-export const MainButton = ({ children, href, icon, prefetch, theme = EMainButtonTheme.NEUTRAL, ...buttonProps }: MainButtonProps) => {
+
+export const MainButton = ({
+	children,
+	href,
+	icon,
+	prefetch,
+	theme = EMainButtonTheme.NEUTRAL,
+	...buttonProps
+}: MainButtonProps) => {
 	const buttonClassNames = useMemo(() => classNames(
 		'flex items-center justify-between duration-100',
 		'rounded-lg py-1 text-xs font-medium',

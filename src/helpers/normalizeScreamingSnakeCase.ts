@@ -3,4 +3,4 @@ export const normalizeScreamingSnakeCase = (str: string) =>
 	str
 		.split('_')
 		.map((word) => word.toLowerCase())
-		.join(' ');
+		.join(' ')
