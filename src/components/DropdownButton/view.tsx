@@ -30,10 +30,16 @@ export const DropdownButtonView = (props: DropdownButtonViewProps) => {
 					'pl-3 pr-2 py-1 rounded-lg text-xs shadow-sm font-medium',
 					'bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700',
 					'hover:bg-neutral-50 hover:dark:bg-neutral-700 duration-100',
-					'active:opacity-50 focus'
+					'active:opacity-50 focus relative'
 				)}
 				onClick={openDropdown}
 			>
+				{value && (
+					<span
+						className={'absolute left-0 ml-1 w-1 h-1 bg-black dark:bg-white rounded-full'}
+					>
+					</span>
+				)}
 				{title}
 				<Image
 					src={ChevronDownIcon}
@@ -81,6 +87,16 @@ export const DropdownButtonView = (props: DropdownButtonViewProps) => {
 							</button>
 						</li>
 					))}
+					{value && (
+						<li>
+							<button
+								onClick={ () => onValueChange('') }
+								className={ 'text-sm text-blue-500 hover:underline px-2 py-1 w-full text-left' }
+							>
+								Clear selection
+							</button>
+						</li>
+					) }
 				</ul>
 			</div>
 		</>
