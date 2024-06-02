@@ -161,6 +161,16 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 						</tr>
 					</thead>
 					<tbody>
+						{ trucks.length === 0 && (
+							<tr>
+								<td
+									colSpan={6}
+									className={'h-32 text-center py-4 text-neutral-400 dark:text-neutral-200 italic'}
+								>
+									{'No trucks found :('}
+								</td>
+							</tr>
+						)}
 						{ trucks.map(truck => (
 							<tr
 								key={truck.id}
