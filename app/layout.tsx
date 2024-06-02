@@ -43,7 +43,7 @@ export default function RootLayout({
 					<SideNavbar />
 					<SideNavbarWidth />
 					<main
-						className={'pt-8 pb-20 mx-auto px-8 w-full max-w-container'}
+						className={'pt-4 lg:pt-8 pb-10 lg:pb-20 mx-auto px-3 lg:px-8 w-full max-w-container'}
 					>
 						<TopNavbarHeight />
 						{ modal }

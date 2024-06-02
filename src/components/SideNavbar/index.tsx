@@ -31,6 +31,7 @@ export const SideNavbar = (props: SideNavbarProps) => {
 			ref={sideNavbarRef}
 			aria-label={'Site Menu'}
 			className={classNames(
+				'hidden lg:block',
 				'fixed w-64 bg-neutral-200 bg-opacity-60 dark:bg-neutral-700 dark:bg-opacity-10 px-4 py-8'
 			)}
 			style={{

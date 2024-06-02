@@ -10,7 +10,7 @@ export const SideNavbarWidth = () => {
 	const sideNavbarWidth = useLayoutStore((state) => state.sideNavbarWidth)
 	return (
 		<div
-			className={'h-full bg-transparent shrink-0'}
+			className={'hidden lg:block h-full bg-transparent shrink-0'}
 			style={{
 				width: sideNavbarWidth
 			}}

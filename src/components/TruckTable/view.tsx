@@ -119,6 +119,7 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 			</div>
 			<div
 				className={classNames(
+					'overflow-x-auto',
 					'mt-3 p-4 font-light rounded-xl text-sm bg-white dark:bg-neutral-800',
 					'border border-neutral-200 dark:border-neutral-700 shadow-sm',
 				)}
@@ -185,7 +186,14 @@ export const TruckTableView = (props: TruckTableViewProps) => {
 								</td>
 								<td
 									className={'p-2'}
-								>{ truck.description || '–' }
+								>
+									{ truck.description ? truck.description: (
+										<span
+											className={'text-neutral-400 dark:text-neutral-200 italic'}
+										>
+											{'No description'}
+										</span>
+									)}
 								</td>
 								<td
 									className={'p-2 space-x-2 flex items-center'}

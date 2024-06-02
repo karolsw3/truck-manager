@@ -31,7 +31,7 @@ export const TopNavbar = () => {
 		>
 			<ul
 				className={classNames(
-					'w-full pl-4 pr-8 flex items-center justify-between',
+					'w-full pl-3 lg:pl-4 pr-3 lg:pr-8 flex items-center justify-between',
 				)}
 			>
 				<li
